@@ -1,0 +1,85 @@
+import datetime
+
+#used _init_ for initializing a newly created object calling itself(self), acting as constructor.
+class Event:
+   def __init__(self, title, description, date, time): 
+       self.title = title
+       self.description = description
+       self.date = date
+       self.time = time
+
+   def __str__(self):
+       return f"{self.title} - {self.description} - {self.date} - {self.time}"
+# Function to add a new event
+def create_event(title, description, date, time):
+   event = Event(title, description, date, time)
+   events.append(event)
+   return event
+# Function to listing events event
+def list_events():
+   for event in events:
+       print(event)
+# Function to delete an event
+def delete_event(title):
+   for event in events:
+       if event.title == title:
+           events.remove(event)
+           return True
+   return False
+# Function to search any listed event
+def search_events(query):
+   for event in events:
+       if query in event.title or query in event.description:
+           print(event)
+# Function to editing an event allowing changes to the attributes
+def edit_event(title, new_title, new_description, new_date, new_time):
+   for event in events:
+       if event.title == title:
+           event.title = new_title
+           event.description = new_description
+           event.date = new_date
+           event.time = new_time
+           return True
+   return False
+
+events = []
+# text-based user interface
+
+while True:
+   print("1. Create Event")
+   print("2. List Events")
+   print("3. Delete Event")
+   print("4. Search Events")
+   print("5. Edit Event")
+   print("6. Exit")
+#Choosing an attribute
+   choice = input("Enter your choice: ")
+
+   if choice == "1":
+       title = input("Enter the title of the event: ")
+       description = input("Enter the description of the event: ")
+       date = input("Enter the date of the event (YYYY-MM-DD): ")
+       time = input("Enter the time of the event (HH:MM): ")
+       create_event(title, description, date, time)
+   elif choice == "2":
+       list_events()
+#deletion functionality
+   elif choice == "3":
+       title = input("Enter the title of the event to delete: ")
+       delete_event(title)
+#searching
+   elif choice == "4":
+       query = input("Enter the query to search for events: ")
+       search_events(query)
+#editing the event and writing the new event
+   elif choice == "5":
+       title = input("Enter the title of the event to edit: ")
+       new_title = input("Enter the new title of the event: ")
+       new_description = input("Enter the new description of the event: ")
+       new_date = input("Enter the new date of the event (YYYY-MM-DD): ")
+       new_time = input("Enter the new time of the event (HH:MM): ")
+       edit_event(title, new_title, new_description, new_date, new_time)
+   elif choice == "6":
+       break
+   else:
+       print("Invalid choice")
